@@ -1,4 +1,3 @@
-// tag::copyright[]
 /*******************************************************************************
  * Copyright (c) 2017 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
@@ -9,13 +8,25 @@
  * Contributors:
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
-// end::copyright[]
+
 package io.openliberty.sample.system;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
-@ApplicationPath("/system")
-public class SystemApplication extends Application {
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+
+@ApplicationScoped
+public class SystemConfig {
+
+  @Inject
+  @ConfigProperty(name = "io_openliberty_sample_system_inMaintenance")
+  Provider<Boolean> inMaintenance;
+
+
+  public boolean isInMaintenance() {
+    return inMaintenance.get();
+  }
 }

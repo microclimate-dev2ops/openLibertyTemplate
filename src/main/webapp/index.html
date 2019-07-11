@@ -18,6 +18,8 @@
         <script src="js/mpData.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
+        <link href="img/favicon.ico" rel="icon" />
+        <link href="img/favicon.ico" rel="shortcut icon" />
     </head>
     <body>
         <section id="appIntro">
@@ -46,12 +48,18 @@
         </section>
 
         <section id="whereTo">
-            <p>This sample app, running on Open Liberty, uses a microservice to get the system properties from your laptop and displays them in your browser. It also displays health information about the microservice (or it will when you've added the capability) and metrics for the microservice. Scroll down to learn more.</p>
+            <h2>Where to next, captain?</h2>
+            <h4>Set course for the Open Liberty guides!</h4>
+            <p>All of the info you need to continue your journey is here, laid out in easy to follow steps and examples. Searching our current selection makes it easy to find the guide that will help make your next project a reality.</p>
+            <a href="https://openliberty.io/guides/"><button id="guidesButton">View all Open Liberty guides</button></a>
+
+            <h4>Learn more about this sample app and a sweet Eclipse MicroProfile&reg; bonus! </h4>
+            <p>Some things just go together, like Earth and gravity or lasers and spaceships.<br>Another dynamic pair, Open Liberty and MicroProfile, provide the latest capabilities for building microservices by working together.<br><br>Your sample app utilizes MicroProfile health, config, and metrics, while running on Open Liberty.  Scroll down to learn more.</p>
         </section>
 
         <section id="openLibertyAndMp">
             <h1>System properties sample Insights</h1>
-            <h2>Built with Microprofile on Open Liberty </h2>
+            <h2>Built with MicroProfile on Open Liberty </h2>
             <div class="msSection collapsed" id="healthSection">
                 <div class="collapsibleRow headerRow" onClick="toggle()">
                     <div class="headerIcon"><img src="img/health.svg"/></div>
@@ -70,7 +78,31 @@
                                 <p id="serviceStatus"></p>
                             </div>
                         </div>
+                        <div id="healthNote">
+                            <b>Please note:</b>
+                            <p>Changing the in-maintenance mode property in the 'Config' section below directly affects this value.</p>
+                        </div>
                         <table id="healthTable"></table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="msSection collapsed" id="configSection">
+                <div class="collapsibleRow headerRow" onClick="toggle()">
+                    <div class="headerIcon"><img src="img/config.svg"/></div>
+                    <div class="headerTitle">
+                        <h2>Config</h2>
+                        <p>Exposing your service configuration</p>
+                        <img class="caret" src="img/carets/caret_down_orange.svg"/>
+                    </div>
+                </div>
+                <div class="collapsibleContent" id="collapsibleConfig">
+                    <div class="sectionContent">
+                        <table id="configTable">
+                            <tbody id="configTableBody">
+                            <tr><th>PROPERTY</th><th>VALUE</th></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -96,24 +128,18 @@
 
                 <div id="learnMore">
                         <h2>Want to learn more about Open Liberty and MicroProfile?</h2>
-                        <p>Continue your winning streak and keep building successful apps with the help of our guides. Our MicroProfile&trade; guides are a great place to start if you want to build something similar to this sample app.</p>
+                        <p>Continue your winning streak and keep building successful apps with the help of our guides. Our MicroProfile guides are a great place to start if you want to build something similar to this sample app.</p>
                         <a href="https://openliberty.io/guides/?search=MicroProfile&key=tag"><button id="mpGuidesButton">Check out our MicroProfile guides</button></a>
                     </div>
             </div>
 
 
         </section>
-        <section id="whereTo">
-            <h2>Where to next, captain?</h2>
-            <h4>Set course for the Open Liberty guides!</h4>
-            <p>All of the info you need to continue your journey is here, laid out in easy to follow steps and examples. Searching our current selection makes it easy to find the guide that will help make your next project a reality.</p>
-            <a href="https://openliberty.io/guides/"><button id="guidesButton">View all Open Liberty guides</button></a>
-        </section>
 
         <script>
             displaySystemProperties(); // this calls displayMetrics() because it is a dependency
             displayHealth();
-            //displayConfigProperties();
+            displayConfigProperties();
         </script>
     </body>
 

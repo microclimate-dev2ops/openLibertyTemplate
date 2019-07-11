@@ -1,6 +1,5 @@
-// tag::copyright[]
 /*******************************************************************************
- * Copyright (c) 2018, 2019  IBM Corporation and others.
+ * Copyright (c) 2018 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,36 +8,36 @@
  * Contributors:
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
-// end::copyright[]
 package io.openliberty.sample.system;
 
 import javax.enterprise.context.ApplicationScoped;
-
 import javax.inject.Inject;
-import javax.inject.Provider;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.health.Health;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
-import org.eclipse.microprofile.health.HealthCheckResponseBuilder;
 
 @Health
 @ApplicationScoped
 public class SystemHealth implements HealthCheck {
-
-    @Inject
-    @ConfigProperty(name = "io_openliberty_guides_system_inMaintenance")
-    Provider<String> inMaintenance;
 	
-    @Override
-    public HealthCheckResponse call() {
-        HealthCheckResponseBuilder builder = HealthCheckResponse.named(
-		SystemResource.class.getSimpleName());
-        if (inMaintenance != null && inMaintenance.get().equalsIgnoreCase("true")) {
-            return builder.withData("services", "not available").down().build();
-        }
-        return builder.withData("services", "available").up().build();
+	@Inject
+	SystemConfig systemConfig;
+	
+	public boolean isHealthy() {
+	    if (systemConfig.isInMaintenance()) {
+	      return false;
+	    }
+	     return true;
+	  }
+	
+  @Override
+  public HealthCheckResponse call() {
+    if (!isHealthy()) {
+      return HealthCheckResponse.named(SystemResource.class.getSimpleName())
+    		  .withData("services","not available").down().build();
     }
-    
+    return HealthCheckResponse.named(SystemResource.class.getSimpleName())
+            .withData("services","available").up().build();
+  }
 }

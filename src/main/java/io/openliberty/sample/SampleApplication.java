@@ -1,4 +1,3 @@
-// tag::copyright[]
 /*******************************************************************************
  * Copyright (c) 2017 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
@@ -9,23 +8,12 @@
  * Contributors:
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
-// end::copyright[]
-package io.openliberty.sample.metrics;
 
-import java.util.HashSet;
-import java.util.Set;
+package io.openliberty.sample;
 
-// JAX-RS
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/metricsOverHTTP")
-public class MetricsOverHTTPApplication extends Application {
-    
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new HashSet<>();
-        resources.add(MetricsOverHTTPResource.class);
-        return resources;
-    }
+@ApplicationPath("system")
+public class SampleApplication extends Application {
 }
